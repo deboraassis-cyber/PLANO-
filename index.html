@@ -1,162 +1,2777 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IncludEdu - Plataforma Colaborativa de Planos de Aula Inclusivos</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background-color: #f0f4f8;
-            color: #333;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header h1 {
-            font-size: 24px;
-        }
-        header p {
-            font-size: 14px;
-            color: #bdc3c7;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .tag {
-            display: inline-block;
-            background: #e1f5fe;
-            color: #0288d1;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-        .tag-atypical {
-            background: #f3e5f5;
-            color: #7b1fa2;
-        }
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        .author {
-            font-size: 13px;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-        }
-        .section-title {
-            font-weight: bold;
-            color: #34495e;
-            margin-top: 15px;
-        }
-        .rating {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .stars {
-            color: #f1c40f;
-            font-size: 18px;
-        }
-        .btn {
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .btn-suggest {
-            background: #2980b9;
-        }
-        .btn:hover {
-            opacity: 0.9;
-        }
-        .comment-box {
-            background: #fafafa;
-            border-left: 3px solid #2980b9;
-            padding: 10px 15px;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mesmo Objetivo | Colaboração Pedagógica</title>
+
+<style>
+:root{
+  --blue:#215d7b;
+  --blue2:#eaf3f7;
+  --green:#367968;
+  --ink:#18303b;
+  --muted:#61727a;
+  --line:#dce5e7;
+  --bg:#f6f8f8;
+  --white:#fff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus{
+  outline:3px solid #9ac2d1;
+  outline-offset:2px;
+}
+
+header{
+  height:76px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  padding:0 max(20px,calc((100vw - 1240px)/2));
+  gap:30px;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.brand{
+  background:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-align:left;
+  color:var(--ink);
+}
+
+.brand > span{
+  display:grid;
+  place-items:center;
+  background:var(--blue);
+  color:white;
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  font-weight:800;
+}
+
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+nav{
+  display:flex;
+  gap:4px;
+  margin-left:auto;
+}
+
+nav button{
+  background:none;
+  color:#52636b;
+  padding:11px 12px;
+  border-radius:8px;
+  font-size:14px;
+}
+
+nav button:hover,
+nav .active{
+  background:var(--blue2);
+  color:var(--blue);
+  font-weight:bold;
+}
+
+.menu{
+  display:none;
+  margin-left:auto;
+  background:none;
+  font-size:24px;
+}
+
+main{
+  max-width:1240px;
+  margin:auto;
+  padding:38px 24px 70px;
+}
+
+.hero{
+  background:linear-gradient(120deg,#edf6f7,#f8fbfb);
+  border:1px solid #dbe9e7;
+  border-radius:22px;
+  padding:58px 7%;
+  margin-bottom:38px;
+}
+
+.eyebrow{
+  font-size:11px;
+  letter-spacing:.12em;
+  color:var(--green);
+  font-weight:bold;
+}
+
+.hero h1,
+.page-title h1,
+.detail-head h1{
+  font-size:clamp(28px,4vw,44px);
+  line-height:1.1;
+  margin:10px 0 12px;
+  max-width:800px;
+}
+
+.hero p{
+  color:var(--blue);
+  font-size:18px;
+}
+
+.search{
+  background:#fff;
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:4px 14px;
+  border-radius:12px;
+  max-width:750px;
+  margin-top:26px;
+  box-shadow:0 8px 30px #173c4710;
+}
+
+.search input{
+  border:0;
+  outline:0;
+  width:100%;
+  padding:13px 4px;
+}
+
+h2{
+  font-size:21px;
+  margin:28px 0 16px;
+}
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+
+.category{
+  min-height:105px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  text-align:left;
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.category:hover{
+  border-color:#91b6b2;
+  transform:translateY(-2px);
+}
+
+.section-head,
+.page-title,
+.detail-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.link{
+  background:none;
+  color:var(--blue);
+  font-weight:bold;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.plan-card,
+.detail-box,
+.form-card,
+.record{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:20px;
+}
+
+.plan-card{
+  display:flex;
+  flex-direction:column;
+}
+
+.badges{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.badges span,
+.skills small{
+  font-size:11px;
+  background:var(--blue2);
+  color:var(--blue);
+  padding:4px 7px;
+  border-radius:5px;
+}
+
+.plan-card h3{
+  margin:14px 0 7px;
+  font-size:18px;
+}
+
+.muted{
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.meta{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  color:var(--muted);
+  font-size:12px;
+  margin:15px 0;
+}
+
+.skills{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  align-items:center;
+  margin-top:auto;
+  padding-top:18px;
+  flex-wrap:wrap;
+}
+
+.actions button{
+  border:1px solid var(--line);
+  background:white;
+  padding:8px 10px;
+  border-radius:8px;
+  color:var(--ink);
+}
+
+.actions button:first-child{
+  color:var(--blue);
+  font-weight:bold;
+}
+
+.notice{
+  display:flex;
+  gap:15px;
+  background:#edf7f3;
+  border:1px solid #cde4db;
+  padding:18px;
+  border-radius:14px;
+  margin-top:36px;
+}
+
+.notice p{
+  margin:5px 0 0;
+  color:#536964;
+  font-size:14px;
+}
+
+.filters{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  display:grid;
+  grid-template-columns:2fr repeat(4,1fr);
+  gap:10px;
+  margin-bottom:25px;
+}
+
+label{
+  font-size:12px;
+  font-weight:bold;
+  color:#42535b;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #cdd8db;
+  border-radius:8px;
+  padding:10px;
+  background:white;
+  color:var(--ink);
+}
+
+textarea{
+  min-height:82px;
+  resize:vertical;
+}
+
+.empty{
+  text-align:center;
+  background:white;
+  border:1px dashed #b9c8ca;
+  border-radius:16px;
+  padding:50px 20px;
+  color:var(--muted);
+}
+
+.empty button,
+.primary{
+  background:var(--blue);
+  color:white;
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.back{
+  background:none;
+  color:var(--blue);
+  margin-bottom:15px;
+}
+
+.detail-head{
+  align-items:center;
+}
+
+.objective{
+  background:#eef6f4;
+  border-left:4px solid var(--green);
+  padding:17px 20px;
+  margin:22px 0;
+  border-radius:0 10px 10px 0;
+}
+
+.objective p{
+  margin:6px 0;
+}
+
+.objective small{
+  color:var(--green);
+}
+
+.tabs{
+  display:flex;
+  border-bottom:1px solid var(--line);
+  margin:25px 0;
+}
+
+.tabs button{
+  padding:13px 18px;
+  background:none;
+  color:var(--muted);
+  font-weight:bold;
+}
+
+.tabs .active{
+  color:var(--blue);
+  border-bottom:3px solid var(--blue);
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.detail-box h3{
+  font-size:13px;
+  color:var(--blue);
+  margin:0 0 8px;
+}
+
+.detail-box p{
+  margin:0;
+  line-height:1.55;
+}
+
+.compare{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.compare > div{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:15px;
+}
+
+.compare p{
+  font-size:13px;
+  color:var(--muted);
+  margin:4px 0;
+}
+
+.stepper{
+  display:flex;
+  gap:5px;
+  overflow:auto;
+  margin:25px 0;
+}
+
+.stepper button{
+  white-space:nowrap;
+  background:white;
+  border:1px solid var(--line);
+  padding:9px 12px;
+  border-radius:8px;
+  color:var(--muted);
+}
+
+.stepper .current,
+.stepper .done{
+  background:var(--blue2);
+  color:var(--blue);
+  border-color:#b9d3dd;
+}
+
+.form-card{
+  max-width:850px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.form-card > label{
+  margin:14px 0;
+}
+
+.checks{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.checks label{
+  flex-direction:row;
+  align-items:center;
+  background:#f7faf9;
+  padding:10px;
+  border-radius:8px;
+}
+
+.checks input{
+  width:auto;
+}
+
+.form-actions{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:22px;
+}
+
+.form-actions button{
+  padding:10px 14px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:white;
+}
+
+.form-actions .primary{
+  background:var(--blue);
+  color:white;
+}
+
+.review{
+  background:#f6f8f8;
+  padding:18px;
+  border-radius:10px;
+}
+
+.communication{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:25px;
+}
+
+.record{
+  margin-bottom:12px;
+}
+
+.record small{
+  display:block;
+  color:var(--muted);
+  margin:4px 0;
+}
+
+.record p{
+  font-size:13px;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#183b43;
+  color:white;
+  padding:14px 18px;
+  border-radius:10px;
+  box-shadow:0 10px 30px #0003;
+  z-index:30;
+}
+
+@media(max-width:900px){
+
+  header{
+    gap:12px;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  nav{
+    display:none;
+    position:absolute;
+    top:76px;
+    left:0;
+    right:0;
+    background:white;
+    border-bottom:1px solid var(--line);
+    padding:10px 20px;
+    flex-direction:column;
+  }
+
+  nav.open{
+    display:flex;
+  }
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .filters{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .filters label:first-child{
+    grid-column:1/-1;
+  }
+
+  .communication{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:580px){
+
+  main{
+    padding:24px 16px 55px;
+  }
+
+  .hero{
+    padding:35px 20px;
+  }
+
+  .grid,
+  .detail-grid,
+  .compare,
+  .checks,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .categories{
+    grid-template-columns:1fr;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .filters label:first-child{
+    grid-column:auto;
+  }
+
+  .detail-head,
+  .page-title{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+}
+
+</style>
 </head>
+
 <body>
 
-    <header>
-        <div>
-            <h1>IncludEdu 🧩</h1>
-            <p>Rede Colaborativa de Planos de Aula Adaptados para Alunos Atípicos</p>
-        </div>
-        <button class="btn">+ Compartilhar Plano</button>
-    </header>
+<header>
 
-    <div class="container">
-        
-        <!-- Card de Exemplo de Plano de Aula -->
-        <div class="card">
-            <div>
-                <span class="tag">6º Ano - Ciências</span>
-                <span class="tag tag-atypical">Adaptação: TEA (Autismo) / TDAH</span>
-            </div>
-            
-            <h2 style="margin-top: 10px;">Sistema Solar e Gravidade (Atividade Sensorial)</h2>
-            <p class="author">Publicado por: Profª. Débora Assis • Há 2 dias</p>
+<button class="brand" onclick="go('Início')">
+<span>MO</span>
 
-            <p class="section-title">🎯 Objetivo Geral:</p>
-            <p>Compreender a relação de rotação e translação dos planetas.</p>
+<div>
+<b>Mesmo Objetivo</b>
+<small>colaboração pedagógica</small>
+</div>
 
-            <p class="section-title">🧩 Adaptação Inclusiva para Alunos Atípicos:</p>
-            <p>Uso de maquete tátil com texturas diferentes para cada planeta e suporte visual com rotina estruturada em fichas para evitar sobrecarga sensorial.</p>
+</button>
 
-            <div class="rating">
-                <div>
-                    <span>Avaliação da comunidade: </span>
-                    <span class="stars">★ ★ ★ ★ ★</span>
-                    <span style="font-size: 13px; color: #7f8c8d;">(4.9 - 12 avaliações)</span>
-                </div>
-                <button class="btn btn-suggest">Propor Ajuste / Adaptação</button>
-            </div>
+<button class="menu"
+onclick="document.querySelector('nav').classList.toggle('open')"
+aria-label="Abrir menu">
+☰
+</button>
 
-            <!-- Sugestões da Comunidade -->
-            <div style="margin-top: 20px;">
-                <p class="section-title">💬 Sugestões de Melhorias de Outros Professores:</p>
-                <div class="comment-box">
-                    <strong>Prof. Carlos:</strong> "Para alunos com hipersensibilidade auditiva, sugiro realizar a atividade em um ambiente externo com menor ruído."
-                </div>
-                <div class="comment-box">
-                    <strong>Profª. Mariana:</strong> "Adicionei cartões de comunicação alternativa (PECS) para facilitar a escolha dos planetas."
-                </div>
-            </div>
-        </div>
+<nav id="nav"></nav>
 
-    </div>
+</header>
+
+<div id="app"></div>
+
+<div id="toast"
+class="toast"
+style="display:none">
+</div>
+
+<script>
+
+const profiles=[
+"Aluno típico",
+"TEA",
+"TDAH — Nível 1",
+"TDAH — Nível 2",
+"TDAH — Nível 3"
+];
+
+const strategies={
+
+"Aluno típico":[
+"Manter objetivos e critérios de avaliação claros."
+],
+
+"TEA":[
+"Rotina estruturada e previsível",
+"Instruções objetivas",
+"Apoios visuais",
+"Atividade dividida em etapas",
+"Redução de estímulos desnecessários",
+"Diferentes maneiras de participar",
+"Tempo adicional e pausas",
+"Comunicação alternativa/aumentativa, quando aplicável"
+],
+
+"TDAH — Nível 1":[
+"Organização visual da tarefa",
+"Instruções claras e breves",
+"Divisão da atividade em etapas",
+"Recursos visuais"
+],
+
+"TDAH — Nível 2":[
+"Organização visual da tarefa",
+"Divisão da atividade em etapas",
+"Redução de distrações",
+"Pausas planejadas",
+"Alternância de atividades",
+"Tempo flexibilizado",
+"Estratégias de participação"
+],
+
+"TDAH — Nível 3":[
+"Planejamento individualizado com equipe",
+"Atividade em etapas pequenas",
+"Instruções claras e retomadas",
+"Ambiente com menos distrações",
+"Pausas e autorregulação",
+"Apoios visuais",
+"Formas alternativas de participação e avaliação"
+]
+
+};
+
+const demo=[
+
+{
+id:"p1",
+discipline:"Língua Portuguesa",
+grade:"3º ano",
+age:"8 a 9 anos",
+theme:"Construção de sentidos no texto",
+profile:"TEA",
+objective:"Compreender informações explícitas e inferir sentidos em um texto curto.",
+skills:["EF15LP03","EF35LP03"],
+time:"50 minutos",
+materials:["Texto impresso","Quadro","Marcadores"],
+methodology:"Leitura mediada, conversa orientada e resolução de questões.",
+development:"Leitura coletiva do texto, identificação de informações e discussão das respostas.",
+activity:"Resolver questões e justificar respostas com trechos do texto.",
+assessment:"Observação da participação e análise das respostas.",
+adaptations:[
+"Apoios visuais",
+"Instruções objetivas",
+"Atividade dividida em etapas",
+"Tempo adicional e pausas"
+],
+uses:28,
+created:"2026-08-28"
+},
+
+{
+id:"p2",
+discipline:"Matemática",
+grade:"4º ano",
+age:"9 a 10 anos",
+theme:"Resolução de problemas",
+profile:"TDAH — Nível 1",
+objective:"Resolver problemas envolvendo as quatro operações e explicar estratégias utilizadas.",
+skills:["EF04MA07","EF04MA08"],
+time:"50 minutos",
+materials:["Situações-problema","Caderno","Quadro"],
+methodology:"Resolução individual e em duplas com discussão das estratégias.",
+development:"Apresentação do problema, levantamento de dados e resolução passo a passo.",
+activity:"Resolver três situações-problema de complexidade progressiva.",
+assessment:"Análise do raciocínio e das estratégias apresentadas.",
+adaptations:[
+"Divisão da atividade em etapas",
+"Instruções claras e breves",
+"Organização visual da tarefa"
+],
+uses:35,
+created:"2026-08-30"
+},
+
+{
+id:"p3",
+discipline:"Ciências",
+grade:"5º ano",
+age:"10 a 11 anos",
+theme:"Ciclo da água",
+profile:"Aluno típico",
+objective:"Compreender as principais etapas do ciclo da água e sua relação com o ambiente.",
+skills:["EF05CI02"],
+time:"45 minutos",
+materials:["Imagem do ciclo","Vídeo curto","Caderno"],
+methodology:"Explanação dialogada, observação e registro.",
+development:"Observação de esquema, conversa e organização das etapas.",
+activity:"Produzir uma sequência explicativa sobre o ciclo da água.",
+assessment:"Produção escrita e participação.",
+adaptations:["Objetivos claros"],
+uses:19,
+created:"2026-08-26"
+},
+
+{
+id:"p4",
+discipline:"História",
+grade:"2º ano",
+age:"7 a 8 anos",
+theme:"Memórias e histórias da comunidade",
+profile:"TDAH — Nível 2",
+objective:"Reconhecer diferentes fontes de memória e relacioná-las à história da comunidade.",
+skills:["EF02HI01"],
+time:"50 minutos",
+materials:["Fotografias","Relatos","Cartolina"],
+methodology:"Análise de fontes e conversa orientada.",
+development:"Apresentação das fontes, comparação e registro das descobertas.",
+activity:"Montar uma linha do tempo coletiva.",
+assessment:"Participação e registros.",
+adaptations:[
+"Pausas planejadas",
+"Redução de distrações",
+"Atividade em etapas"
+],
+uses:14,
+created:"2026-08-24"
+}
+
+];
+
+let plans=
+JSON.parse(localStorage.getItem("mo-plans")||"null")
+||demo;
+
+let favorites=
+JSON.parse(localStorage.getItem("mo-fav")||"[]");
+
+let records=
+JSON.parse(localStorage.getItem("mo-records")||"[]");
+
+let page="Início";
+let selected=null;
+let query="";
+
+let filters={
+discipline:"",
+grade:"",
+profile:"",
+sort:"recent"
+};
+
+let step=1;
+
+const navItems=[
+"Início",
+"Explorar planos",
+"Criar plano",
+"Comunicação pedagógica",
+"Meus planos",
+"Planos salvos"
+];
+
+function persist(){
+
+localStorage.setItem(
+"mo-plans",
+JSON.stringify(plans)
+);
+
+localStorage.setItem(
+"mo-fav",
+JSON.stringify(favorites)
+);
+
+localStorage.setItem(
+"mo-records",
+JSON.stringify(records)
+);
+
+}
+
+function notify(t){
+
+const x=
+document.getElementById("toast");
+
+x.textContent="✓ "+t;
+
+x.style.display="block";
+
+setTimeout(
+()=>x.style.display="none",
+2600
+);
+
+}
+
+function esc(s){
+
+return String(s??"")
+.replace(
+/[&<>"']/g,
+
+c=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[c])
+
+);
+
+}
+
+function go(p){
+
+page=p;
+
+document
+.querySelector("nav")
+.classList
+.remove("open");
+
+render();
+
+}
+
+function renderNav(){
+
+document.getElementById("nav").innerHTML=
+
+navItems.map(n=>`
+
+<button
+class="${page===n?"active":""}"
+onclick="go('${n}')">
+
+${n}
+
+</button>
+
+`).join("");
+
+}
+
+function card(p){
+
+return `
+
+<article class="plan-card">
+
+<div class="badges">
+
+<span>${esc(p.discipline)}</span>
+
+<span>${esc(p.grade)}</span>
+
+</div>
+
+<h3>${esc(p.theme)}</h3>
+
+<p class="muted">
+
+${esc(p.objective)}
+
+</p>
+
+<div class="meta">
+
+<span>◷ ${esc(p.time)}</span>
+
+<span>◉ ${esc(p.profile)}</span>
+
+</div>
+
+<div class="skills">
+
+${p.skills.map(
+s=>`<small>${esc(s)}</small>`
+).join("")}
+
+</div>
+
+<div class="actions">
+
+<button
+onclick="openPlan('${p.id}')">
+
+Abrir
+
+</button>
+
+<button
+aria-label="Favoritar"
+onclick="toggleFav('${p.id}')">
+
+${favorites.includes(p.id)?"♥":"♡"}
+
+</button>
+
+<button
+aria-label="Duplicar"
+onclick="duplicatePlan('${p.id}')">
+
+⧉
+
+</button>
+
+<button
+aria-label="Compartilhar"
+onclick="sharePlan('${p.id}')">
+
+↗
+
+</button>
+
+</div>
+
+</article>
+
+`;
+
+}
+
+function home(){
+
+let recent=[...plans]
+.sort((a,b)=>b.created.localeCompare(a.created))
+.slice(0,4);
+
+return `
+
+<main>
+
+<section class="hero">
+
+<span class="eyebrow">
+COLABORAÇÃO PEDAGÓGICA
+</span>
+
+<h1>
+Bem-vindo à plataforma de colaboração pedagógica.
+</h1>
+
+<p>
+<strong>
+Mesmo objetivo, diferentes caminhos.
+</strong>
+</p>
+
+<div class="search">
+
+⌕
+
+<input
+aria-label="Buscar plano"
+value="${esc(query)}"
+oninput="query=this.value;render()"
+placeholder="Encontre um plano de aula ou estratégia..."
+>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>
+Encontre por perfil
+</h2>
+
+<div class="categories">
+
+${profiles.map(p=>`
+
+<button
+class="category"
+onclick="filters.profile='${p}';go('Explorar planos')">
+
+<b>${esc(p)}</b>
+
+<span>
+Ver planos e estratégias →
+</span>
+
+</button>
+
+`).join("")}
+
+</div>
+
+</section>
+
+<section>
+
+<div class="section-head">
+
+<h2>
+Planos recentes
+</h2>
+
+<button
+class="link"
+onclick="go('Explorar planos')">
+
+Ver todos
+
+</button>
+
+</div>
+
+<div class="grid">
+
+${recent.map(card).join("")}
+
+</div>
+
+</section>
+
+<section class="notice">
+
+<b>✦</b>
+
+<div>
+
+<b>
+Planejamento com equidade
+</b>
+
+<p>
+As estratégias são apoio ao planejamento pedagógico e devem ser ajustadas pela equipe educacional conforme o contexto e as necessidades individuais.
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+`;
+
+}
+
+function filtered(){
+
+return plans
+
+.filter(p=>{
+
+let q=query.toLowerCase();
+
+return(
+
+(!q ||
+
+[
+p.discipline,
+p.grade,
+p.theme,
+p.objective,
+...p.skills
+
+].join(" ")
+.toLowerCase()
+.includes(q))
+
+&&
+
+(!filters.discipline ||
+p.discipline===filters.discipline)
+
+&&
+
+(!filters.grade ||
+p.grade===filters.grade)
+
+&&
+
+(!filters.profile ||
+p.profile===filters.profile)
+
+);
+
+})
+
+.sort((a,b)=>
+
+filters.sort==="uses"
+
+? b.uses-a.uses
+
+: b.created.localeCompare(a.created)
+
+);
+
+}
+
+function explore(){
+
+let list=filtered();
+
+let ds=[
+...new Set(
+plans.map(p=>p.discipline)
+)
+];
+
+let gs=[
+...new Set(
+plans.map(p=>p.grade)
+)
+];
+
+return `
+
+<main>
+
+<div class="page-title">
+
+<div>
+
+<span class="eyebrow">
+CATÁLOGO
+</span>
+
+<h1>
+Explorar planos
+</h1>
+
+</div>
+
+<p>
+${list.length} resultado(s)
+</p>
+
+</div>
+
+<div class="filters">
+
+<label>
+
+Buscar
+
+<input
+value="${esc(query)}"
+oninput="query=this.value;render()"
+placeholder="Tema, habilidade ou palavra-chave"
+>
+
+</label>
+
+<label>
+
+Disciplina
+
+<select
+onchange="filters.discipline=this.value;render()">
+
+<option value="">
+Todas
+</option>
+
+${ds.map(x=>`
+
+<option
+${filters.discipline===x?"selected":""}>
+
+${x}
+
+</option>
+
+`).join("")}
+
+</select>
+
+</label>
+
+<label>
+
+Ano
+
+<select
+onchange="filters.grade=this.value;render()">
+
+<option value="">
+Todos
+</option>
+
+${gs.map(x=>`
+
+<option
+${filters.grade===x?"selected":""}>
+
+${x}
+
+</option>
+
+`).join("")}
+
+</select>
+
+</label>
+
+<label>
+
+Perfil
+
+<select
+onchange="filters.profile=this.value;render()">
+
+<option value="">
+Todos
+</option>
+
+${profiles.map(x=>`
+
+<option
+${filters.profile===x?"selected":""}>
+
+${x}
+
+</option>
+
+`).join("")}
+
+</select>
+
+</label>
+
+<label>
+
+Ordenar
+
+<select
+onchange="filters.sort=this.value;render()">
+
+<option
+value="recent"
+${filters.sort==="recent"?"selected":""}>
+
+Mais recentes
+
+</option>
+
+<option
+value="uses"
+${filters.sort==="uses"?"selected":""}>
+
+Mais utilizados
+
+</option>
+
+</select>
+
+</label>
+
+</div>
+
+${list.length
+
+? `
+
+<div class="grid">
+
+${list.map(card).join("")}
+
+</div>
+
+`
+
+: `
+
+<div class="empty">
+
+<h3>
+Nenhum plano encontrado
+</h3>
+
+<p>
+Tente mudar os filtros ou buscar outro tema.
+</p>
+
+<button
+onclick="
+query='';
+filters={
+discipline:'',
+grade:'',
+profile:'',
+sort:'recent'
+};
+render();
+">
+
+Limpar filtros
+
+</button>
+
+</div>
+
+`
+
+}
+
+</main>
+
+`;
+
+}
+
+function openPlan(id){
+
+selected=
+plans.find(p=>p.id===id);
+
+page="Detalhes";
+
+render();
+
+}
+
+function details(){
+
+let p=
+selected||plans[0];
+
+return `
+
+<main>
+
+<button
+class="back"
+onclick="go('Explorar planos')">
+
+← Voltar
+
+</button>
+
+<div class="detail-head">
+
+<div>
+
+<span class="eyebrow">
+
+${esc(p.discipline)}
+•
+${esc(p.grade)}
+
+</span>
+
+<h1>
+${esc(p.theme)}
+</h1>
+
+<p>
+${esc(p.profile)}
+</p>
+
+</div>
+
+<div class="actions">
+
+<button
+onclick="toggleFav('${p.id}')">
+
+♡ Favoritar
+
+</button>
+
+<button
+onclick="duplicatePlan('${p.id}')">
+
+⧉ Duplicar
+
+</button>
+
+<button
+onclick="sharePlan('${p.id}')">
+
+↗ Compartilhar
+
+</button>
+
+</div>
+
+</div>
+
+<div class="objective">
+
+<b>
+Objetivo de aprendizagem
+</b>
+
+<p>
+${esc(p.objective)}
+</p>
+
+<small>
+O objetivo permanece em destaque durante a adaptação.
+</small>
+
+</div>
+
+<div class="tabs">
+
+<button
+id="originalTab"
+class="active"
+onclick="showTab('original')">
+
+Plano original
+
+</button>
+
+<button
+id="adaptedTab"
+onclick="showTab('adapted')">
+
+Plano adaptado
+
+</button>
+
+</div>
+
+<div id="tabContent">
+
+<div class="detail-grid">
+
+${[
+["Disciplina",p.discipline],
+["Ano/série",p.grade],
+["Faixa etária",p.age],
+["Habilidades",p.skills.join(", ")],
+["Tempo estimado",p.time],
+["Materiais",p.materials.join(", ")],
+["Metodologia",p.methodology],
+["Desenvolvimento da aula",p.development],
+["Atividade",p.activity],
+["Forma de avaliação",p.assessment]
+
+].map(x=>`
+
+<section class="detail-box">
+
+<h3>${x[0]}</h3>
+
+<p>
+${esc(x[1])}
+</p>
+
+</section>
+
+`).join("")}
+
+</div>
+
+</div>
+
+</main>
+
+`;
+
+}
+
+function showTab(tab){
+
+let p=
+selected||plans[0];
+
+document
+.getElementById("originalTab")
+.classList
+.toggle("active",tab==="original");
+
+document
+.getElementById("adaptedTab")
+.classList
+.toggle("active",tab==="adapted");
+
+document
+.getElementById("tabContent")
+.innerHTML=
+
+tab==="original"
+
+?
+
+`
+
+<div class="detail-grid">
+
+${[
+["Disciplina",p.discipline],
+["Ano/série",p.grade],
+["Faixa etária",p.age],
+["Habilidades",p.skills.join(", ")],
+["Tempo estimado",p.time],
+["Materiais",p.materials.join(", ")],
+["Metodologia",p.methodology],
+["Desenvolvimento da aula",p.development],
+["Atividade",p.activity],
+["Forma de avaliação",p.assessment]
+
+].map(x=>`
+
+<section class="detail-box">
+
+<h3>${x[0]}</h3>
+
+<p>
+${esc(x[1])}
+</p>
+
+</section>
+
+`).join("")}
+
+</div>
+
+`
+
+:
+
+`
+
+<div class="adapted">
+
+<h2>
+Adaptação para ${esc(p.profile)}
+</h2>
+
+<p class="muted">
+
+As estratégias abaixo são sugestões selecionáveis e devem ser ajustadas às características individuais do estudante. Um perfil não determina automaticamente quais adaptações são necessárias.
+
+</p>
+
+<div class="compare">
+
+${(strategies[p.profile]||[])
+
+.map(s=>`
+
+<div>
+
+<b>
+✓ ${esc(s)}
+</b>
+
+<p>
+
+${p.adaptations.includes(s)
+
+?"Selecionada para este plano."
+
+:"Sugestão disponível para personalização."
+
+}
+
+</p>
+
+</div>
+
+`).join("")}
+
+</div>
+
+<div class="detail-grid">
+
+<section class="detail-box">
+
+<h3>
+O que pode ser ajustado
+</h3>
+
+<p>
+
+Linguagem das instruções, quantidade de estímulos, tempo de execução, organização em etapas, recursos visuais, mediação, apresentação do conteúdo, participação, avaliação, acessibilidade, atenção e autorregulação.
+
+</p>
+
+</section>
+
+<section class="detail-box">
+
+<h3>
+Objetivo preservado
+</h3>
+
+<p>
+${esc(p.objective)}
+</p>
+
+</section>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+function toggleFav(id){
+
+favorites=
+
+favorites.includes(id)
+
+?
+
+favorites.filter(x=>x!==id)
+
+:
+
+[...favorites,id];
+
+persist();
+
+render();
+
+notify(
+"Favorito atualizado!"
+);
+
+}
+
+function duplicatePlan(id){
+
+let p=
+plans.find(x=>x.id===id);
+
+let copy={
+...p,
+
+id:"p"+Date.now(),
+
+theme:p.theme+" (cópia)",
+
+owner:true,
+
+copy:true,
+
+created:new Date()
+.toISOString()
+.slice(0,10)
+
+};
+
+plans.unshift(copy);
+
+persist();
+
+selected=copy;
+
+page="Detalhes";
+
+render();
+
+notify(
+"Cópia criada. Você pode editar esta versão."
+);
+
+}
+
+async function sharePlan(id){
+
+let link=
+"https://seuusuario.github.io/seurepositorio/?plano="+id;
+
+try{
+
+await navigator.clipboard.writeText(link);
+
+}catch(e){}
+
+notify(
+"Link de demonstração copiado!"
+);
+
+}
+
+let form={
+
+discipline:"Língua Portuguesa",
+
+grade:"1º ano",
+
+age:"6 a 7 anos",
+
+profile:"TEA",
+
+time:"50 minutos",
+
+theme:"",
+
+objective:"",
+
+skills:[],
+
+methodology:"",
+
+development:"",
+
+activity:"",
+
+assessment:"",
+
+adaptations:[]
+
+};
+
+function create(){
+
+return `
+
+<main>
+
+<div class="page-title">
+
+<div>
+
+<span class="eyebrow">
+NOVO PLANO
+</span>
+
+<h1>
+Criar plano
+</h1>
+
+</div>
+
+<span>
+Etapa ${step} de 6
+</span>
+
+</div>
+
+<div class="stepper">
+
+${[
+"Dados básicos",
+"Objetivos",
+"Metodologia",
+"Atividade",
+"Adaptação",
+"Revisão"
+
+].map((x,i)=>`
+
+<button
+class="${
+step===i+1
+?"current"
+:step>i+1
+?"done"
+:""
+}"
+onclick="step=${i+1};render()">
+
+${i+1}. ${x}
+
+</button>
+
+`).join("")}
+
+</div>
+
+<div class="form-card">
+
+${
+step===1
+
+?
+
+`
+
+<h2>
+1. Dados básicos
+</h2>
+
+<div class="form-grid">
+
+${field("Disciplina","discipline")}
+
+${field("Ano/série","grade")}
+
+${field("Faixa etária","age")}
+
+${field("Tema","theme")}
+
+${field("Tempo estimado","time")}
+
+</div>
+
+`
+
+:
+
+step===2
+
+?
+
+`
+
+<h2>
+2. Objetivos e habilidades
+</h2>
+
+${field(
+"Objetivo de aprendizagem",
+"objective"
+)}
+
+<label>
+
+Habilidades
+(separe por vírgula)
+
+<input
+value="${esc(form.skills.join(", "))}"
+oninput="
+form.skills=
+this.value
+.split(',')
+.map(x=>x.trim())
+.filter(Boolean)
+">
+
+</label>
+
+`
+
+:
+
+step===3
+
+?
+
+`
+
+<h2>
+3. Metodologia e desenvolvimento
+</h2>
+
+${area(
+"Metodologia",
+"methodology"
+)}
+
+${area(
+"Desenvolvimento da aula",
+"development"
+)}
+
+`
+
+:
+
+step===4
+
+?
+
+`
+
+<h2>
+4. Atividade e avaliação
+</h2>
+
+${area(
+"Atividade",
+"activity"
+)}
+
+${area(
+"Forma de avaliação",
+"assessment"
+)}
+
+`
+
+:
+
+step===5
+
+?
+
+adaptForm()
+
+:
+
+`
+
+<h2>
+6. Revisão
+</h2>
+
+<div class="review">
+
+<b>
+${esc(form.theme||"Sem tema")}
+</b>
+
+<p>
+
+<strong>
+Objetivo:
+</strong>
+
+${esc(
+form.objective||"Não informado"
+)}
+
+</p>
+
+<p>
+
+<strong>
+Perfil:
+</strong>
+
+${esc(form.profile)}
+
+</p>
+
+<p>
+
+<strong>
+Estratégias:
+</strong>
+
+${esc(
+form.adaptations.join(", ")
+||"Nenhuma selecionada"
+)}
+
+</p>
+
+</div>
+
+`
+
+}
+
+<div class="form-actions">
+
+<button
+onclick="
+if(step>1){
+step--;
+render()
+}
+">
+
+Voltar
+
+</button>
+
+${
+
+step<6
+
+?
+
+`
+
+<button
+class="primary"
+onclick="step++;render()">
+
+Continuar
+
+</button>
+
+`
+
+:
+
+`
+
+<span>
+
+<button
+onclick="savePlan(true)">
+
+Salvar rascunho
+
+</button>
+
+<button
+class="primary"
+onclick="savePlan(false)">
+
+Salvar plano
+
+</button>
+
+</span>
+
+`
+
+}
+
+</div>
+
+</div>
+
+</main>
+
+`;
+
+}
+
+function field(label,key){
+
+return `
+
+<label>
+
+${label}
+
+<input
+value="${esc(form[key]||"")}"
+oninput="form.${key}=this.value"
+>
+
+</label>
+
+`;
+
+}
+
+function area(label,key){
+
+return `
+
+<label>
+
+${label}
+
+<textarea
+oninput="form.${key}=this.value">
+
+${esc(form[key]||"")}
+
+</textarea>
+
+</label>
+
+`;
+
+}
+
+function adaptForm(){
+
+return `
+
+<h2>
+5. Perfil e estratégias
+</h2>
+
+<label>
+
+Perfil
+
+<select
+onchange="
+form.profile=this.value;
+form.adaptations=[];
+render()
+">
+
+${profiles.map(p=>`
+
+<option
+${form.profile===p?"selected":""}>
+
+${p}
+
+</option>
+
+`).join("")}
+
+</select>
+
+</label>
+
+<p class="muted">
+
+Selecione apenas as estratégias pertinentes ao estudante e ao contexto.
+
+</p>
+
+<div class="checks">
+
+${strategies[form.profile]
+
+.map(s=>`
+
+<label>
+
+<input
+type="checkbox"
+
+${
+form.adaptations.includes(s)
+?"checked"
+:""
+}
+
+onchange="
+toggleStrategy(
+${JSON.stringify(s)}
+)
+">
+
+${esc(s)}
+
+</label>
+
+`).join("")}
+
+</div>
+
+`;
+
+}
+
+function toggleStrategy(s){
+
+form.adaptations=
+
+form.adaptations.includes(s)
+
+?
+
+form.adaptations.filter(x=>x!==s)
+
+:
+
+[...form.adaptations,s];
+
+}
+
+function savePlan(draft){
+
+if(
+!form.theme
+||
+!form.objective
+){
+
+notify(
+"Preencha pelo menos tema e objetivo."
+);
+
+return;
+
+}
+
+let p={
+
+...form,
+
+id:"p"+Date.now(),
+
+materials:[],
+
+uses:0,
+
+created:new Date()
+.toISOString()
+.slice(0,10),
+
+owner:true,
+
+draft
+
+};
+
+plans.unshift(p);
+
+persist();
+
+notify(
+
+draft
+
+?
+
+"Rascunho salvo!"
+
+:
+
+"Plano salvo com sucesso!"
+
+);
+
+page="Meus planos";
+
+step=1;
+
+render();
+
+}
+
+function communication(){
+
+return `
+
+<main>
+
+<div class="page-title">
+
+<div>
+
+<span class="eyebrow">
+CONTINUIDADE PEDAGÓGICA
+</span>
+
+<h1>
+Comunicação pedagógica
+</h1>
+
+</div>
+
+</div>
+
+<div class="communication">
+
+<div class="form-card">
+
+<h2>
+Novo registro
+</h2>
+
+${[
+"Professor responsável|teacher",
+"Turma|className",
+"Data|date",
+"Conteúdo trabalhado|content",
+"Objetivo da aula|objective",
+"Estratégia utilizada|strategy",
+"Adaptação realizada|adaptation",
+"O que funcionou|worked",
+"O que apresentou dificuldade|difficulty",
+"Observações|notes",
+"Sugestões para o próximo professor|suggestion"
+
+].map(x=>{
+
+let [a,b]=x.split("|");
+
+return b==="date"
+
+?
+
+`
+
+<label>
+
+${a}
+
+<input
+type="date"
+id="r_${b}"
+value="${
+new Date()
+.toISOString()
+.slice(0,10)
+}">
+
+</label>
+
+`
+
+:
+
+`
+
+<label>
+
+${a}
+
+<textarea
+id="r_${b}">
+
+</textarea>
+
+</label>
+
+`;
+
+}).join("")}
+
+<label>
+
+Perfil
+
+<select id="r_profile">
+
+${profiles.map(p=>`
+
+<option>
+${p}
+</option>
+
+`).join("")}
+
+</select>
+
+</label>
+
+<button
+class="primary"
+onclick="saveRecord()">
+
+Salvar registro
+
+</button>
+
+</div>
+
+<div>
+
+<h2>
+Registros recentes
+</h2>
+
+${
+
+records.length
+
+?
+
+records.map(r=>`
+
+<article class="record">
+
+<b>
+
+${esc(r.teacher)}
+•
+${esc(r.className)}
+
+</b>
+
+<small>
+
+${esc(r.date)}
+•
+${esc(r.profile)}
+
+</small>
+
+<p>
+
+<strong>
+Conteúdo:
+</strong>
+
+${esc(r.content)}
+
+</p>
+
+<p>
+
+<strong>
+Funcionou:
+</strong>
+
+${esc(r.worked)}
+
+</p>
+
+</article>
+
+`).join("")
+
+:
+
+`
+
+<div class="empty">
+
+<h3>
+Ainda não há registros
+</h3>
+
+<p>
+
+Use o formulário para registrar o que funcionou e apoiar o próximo professor.
+
+</p>
+
+</div>
+
+`
+
+}
+
+</div>
+
+</div>
+
+</main>
+
+`;
+
+}
+
+function saveRecord(){
+
+let keys=[
+
+"teacher",
+"className",
+"date",
+"content",
+"objective",
+"strategy",
+"adaptation",
+"worked",
+"difficulty",
+"notes",
+"suggestion",
+"profile"
+
+];
+
+let r={
+id:"r"+Date.now()
+};
+
+keys.forEach(
+k=>r[k]=
+document
+.getElementById("r_"+k)
+.value
+);
+
+if(
+!r.teacher
+||
+!r.className
+||
+!r.content
+){
+
+notify(
+"Preencha professor, turma e conteúdo."
+);
+
+return;
+
+}
+
+records.unshift(r);
+
+persist();
+
+notify(
+"Registro pedagógico salvo!"
+);
+
+render();
+
+}
+
+function personal(fav=false){
+
+let list=
+
+fav
+
+?
+
+plans.filter(
+p=>favorites.includes(p.id)
+)
+
+:
+
+plans.filter(
+p=>p.owner
+);
+
+return `
+
+<main>
+
+<div class="page-title">
+
+<div>
+
+<span class="eyebrow">
+
+${fav
+
+?
+
+"FAVORITOS"
+
+:
+
+"ÁREA PESSOAL"
+
+}
+
+</span>
+
+<h1>
+
+${fav
+
+?
+
+"Planos salvos"
+
+:
+
+"Meus planos"
+
+}
+
+</h1>
+
+</div>
+
+</div>
+
+${
+
+list.length
+
+?
+
+`
+
+<div class="grid">
+
+${list.map(card).join("")}
+
+</div>
+
+`
+
+:
+
+`
+
+<div class="empty">
+
+<h3>
+
+${fav
+
+?
+
+"Nenhum plano salvo"
+
+:
+
+"Você ainda não criou planos"
+
+}
+
+</h3>
+
+<p>
+
+${fav
+
+?
+
+"Favorite um plano para encontrá-lo rapidamente aqui."
+
+:
+
+"Crie um plano ou duplique um plano existente."
+
+}
+
+</p>
+
+</div>
+
+`
+
+}
+
+</main>
+
+`;
+
+}
+
+function render(){
+
+renderNav();
+
+let content=
+
+page==="Início"
+
+?
+
+home()
+
+:
+
+page==="Explorar planos"
+
+?
+
+explore()
+
+:
+
+page==="Criar plano"
+
+?
+
+create()
+
+:
+
+page==="Detalhes"
+
+?
+
+details()
+
+:
+
+page==="Comunicação pedagógica"
+
+?
+
+communication()
+
+:
+
+page==="Planos salvos"
+
+?
+
+personal(true)
+
+:
+
+personal(false);
+
+document
+.getElementById("app")
+.innerHTML=content;
+
+}
+
+render();
+
+</script>
 
 </body>
 </html>
