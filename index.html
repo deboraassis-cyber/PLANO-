@@ -3,52 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plano de Aula</title>
+    <title>IncludEdu - Plataforma Colaborativa de Planos de Aula Inclusivos</title>
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f4f6f8;
+            background-color: #f0f4f8;
             color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-size: 24px;
+        }
+        header p {
+            font-size: 14px;
+            color: #bdc3c7;
         }
         .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .tag {
+            display: inline-block;
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .tag-atypical {
+            background: #f3e5f5;
+            color: #7b1fa2;
         }
         h2 {
-            color: #2980b9;
-            margin-top: 20px;
+            color: #2c3e50;
+            margin-bottom: 10px;
         }
-        ul {
-            line-height: 1.6;
+        .author {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #34495e;
+            margin-top: 15px;
+        }
+        .rating {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .stars {
+            color: #f1c40f;
+            font-size: 18px;
+        }
+        .btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-suggest {
+            background: #2980b9;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .comment-box {
+            background: #fafafa;
+            border-left: 3px solid #2980b9;
+            padding: 10px 15px;
+            margin-top: 10px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
+
+    <header>
+        <div>
+            <h1>IncludEdu 🧩</h1>
+            <p>Rede Colaborativa de Planos de Aula Adaptados para Alunos Atípicos</p>
+        </div>
+        <button class="btn">+ Compartilhar Plano</button>
+    </header>
+
     <div class="container">
-        <h1>Plano de Aula</h1>
         
-        <h2>Objetivo</h2>
-        <p>Compartilhar e aprimorar planos de aula de forma colaborativa.</p>
+        <!-- Card de Exemplo de Plano de Aula -->
+        <div class="card">
+            <div>
+                <span class="tag">6º Ano - Ciências</span>
+                <span class="tag tag-atypical">Adaptação: TEA (Autismo) / TDAH</span>
+            </div>
+            
+            <h2 style="margin-top: 10px;">Sistema Solar e Gravidade (Atividade Sensorial)</h2>
+            <p class="author">Publicado por: Profª. Débora Assis • Há 2 dias</p>
 
-        <h2>Conteúdo</h2>
-        <ul>
-            <li>Introdução ao tema</li>
-            <li>Atividades práticas</li>
-            <li>Avaliação e feedback</li>
-        </ul>
+            <p class="section-title">🎯 Objetivo Geral:</p>
+            <p>Compreender a relação de rotação e translação dos planetas.</p>
 
-        <h2>Observações</h2>
-        <p>Este site está hospedado no GitHub Pages.</p>
+            <p class="section-title">🧩 Adaptação Inclusiva para Alunos Atípicos:</p>
+            <p>Uso de maquete tátil com texturas diferentes para cada planeta e suporte visual com rotina estruturada em fichas para evitar sobrecarga sensorial.</p>
+
+            <div class="rating">
+                <div>
+                    <span>Avaliação da comunidade: </span>
+                    <span class="stars">★ ★ ★ ★ ★</span>
+                    <span style="font-size: 13px; color: #7f8c8d;">(4.9 - 12 avaliações)</span>
+                </div>
+                <button class="btn btn-suggest">Propor Ajuste / Adaptação</button>
+            </div>
+
+            <!-- Sugestões da Comunidade -->
+            <div style="margin-top: 20px;">
+                <p class="section-title">💬 Sugestões de Melhorias de Outros Professores:</p>
+                <div class="comment-box">
+                    <strong>Prof. Carlos:</strong> "Para alunos com hipersensibilidade auditiva, sugiro realizar a atividade em um ambiente externo com menor ruído."
+                </div>
+                <div class="comment-box">
+                    <strong>Profª. Mariana:</strong> "Adicionei cartões de comunicação alternativa (PECS) para facilitar a escolha dos planetas."
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </body>
 </html>
